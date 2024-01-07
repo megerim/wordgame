@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
-import { Button, ButtonGroup } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import Link from 'next/link';
 import BackIcon from "@/app/components/icons/BackIcon";
 import ReplayIcon from "@/app/components/icons/ReplayIcon";
 
@@ -12,9 +13,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Divider,
-  Link,
-  Image,
+  Divider
 } from "@nextui-org/react";
 
 
@@ -237,24 +236,22 @@ const BasitFiiller: React.FC = () => {
           </div>
         </CardBody>
         <Divider />
-        <CardFooter className="flex justify-center">
-          <ButtonGroup>
-            <Link href="/">
-              <Button isIconOnly size="lg" color="warning" radius="sm">
-                <BackIcon />
-              </Button>
-            </Link>
-            <Button
-              isIconOnly
-              size="lg"
-              color="secondary"
-              radius="sm"
-              onClick={replayGame}
-            >
-              <ReplayIcon />
+        <CardFooter className="flex justify-between px-16">
+          <Link href="/" passHref>
+            <Button isIconOnly size="lg" color="warning" radius="sm">
+              <BackIcon />
             </Button>
-          </ButtonGroup>
-        </CardFooter>
+          </Link>
+          <Button
+            isIconOnly
+            size="lg"
+            color="secondary"
+            radius="sm"
+            onClick={replayGame}
+          >
+            <ReplayIcon />
+          </Button>
+      </CardFooter>
       </Card>
     </>
   );

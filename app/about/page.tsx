@@ -31,7 +31,7 @@ export default function Home() {
 </p>
 
 
-        <Link className="text-3xl" href="/"><Button size="lg" className="min-w-48">Ana Sayfaya Dön</Button></Link>
+        <Link className="text-3xl my-5" href="/"><Button size="lg" className="min-w-48">Ana Sayfaya Dön</Button></Link>
       
     </CardBody>
     <Divider />

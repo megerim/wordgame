@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Button, Card, CardHeader, CardBody, CardFooter, ButtonGroup, Divider } from '@nextui-org/react';
+import { Button, Card, CardHeader, CardBody, CardFooter, Divider } from '@nextui-org/react';
 import Link from 'next/link';
 import BackIcon from "@/app/components/icons/BackIcon";
 import ReplayIcon from "@/app/components/icons/ReplayIcon";
@@ -85,13 +85,13 @@ const MiniQuiz: React.FC = () => {
   }, [currentQuestionIndex]);
 
   return (
-    <div className="min-h-96 min-w-96 antialiased">
-    <Card>
+    <div  >
+    <Card className='min-h-[450px] min-w-[450px] antialiased'>
       <CardHeader>
         <p>Question {currentQuestionIndex + 1} of {quizData.length}</p>
       </CardHeader>
       <Divider />
-      <CardBody>
+      <CardBody className='justify-center flex'>
         <p className="text-lg font-semibold mb-4">{currentQuestion.question}</p>
         <div className="flex flex-col gap-2">
           {currentQuestion.answers.map((answer) => (
@@ -106,8 +106,7 @@ const MiniQuiz: React.FC = () => {
         </div>
       </CardBody>
       <Divider />
-      <CardFooter className="flex justify-center">
-        <ButtonGroup>
+      <CardFooter className="flex justify-between px-16">
           <Link href="/" passHref>
             <Button isIconOnly size="lg" color="warning" radius="sm">
               <BackIcon />
@@ -122,7 +121,6 @@ const MiniQuiz: React.FC = () => {
           >
             <ReplayIcon />
           </Button>
-        </ButtonGroup>
       </CardFooter>
     </Card>
     </div>
