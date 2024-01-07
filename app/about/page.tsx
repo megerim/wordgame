@@ -1,6 +1,7 @@
 
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-import Image from "next/image";
+import Logo from "@/app/components/ui/Logo";
+import Footer from "@/app/components/ui/Footer";
 
 import { Button } from "@nextui-org/react";
 
@@ -8,7 +9,7 @@ export default function Home() {
   return (
     <Card shadow="lg" className="max-w-[400px] antialiased">
     <CardHeader className="flex justify-center text-center">
-      <Image src={"/logo.png"} className="m-5" width={1500} height={1250} alt="Yeni Bir Dil! Logo" />
+      <Logo />
     </CardHeader>
     <Divider />
     <CardBody className="flex items-center justify-center">
@@ -26,7 +27,7 @@ export default function Home() {
 </ul>
 
 <p className="text-center mt-4">
-  Adım adım kelimeler arasında ilerleyin ve öğrenin!
+  Adım adım ilerleyin, <br/> Adım adım öğrenin!
 </p>
 
 
@@ -35,7 +36,7 @@ export default function Home() {
     </CardBody>
     <Divider />
     <CardFooter className="flex justify-center">
-      <p>&copy;</p> <a href="https://www.github.com/megerim">Mehmet Erim Gökhan</a>
+      <Footer />
     </CardFooter>
   </Card>
   )

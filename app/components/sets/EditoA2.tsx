@@ -4,6 +4,7 @@ import confetti from "canvas-confetti";
 import { Button, ButtonGroup } from "@nextui-org/react";
 import BackIcon from "@/app/components/icons/BackIcon";
 import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import { WordPair, SelectedPair } from '@/app/types/types';
 
 import {
   Card,
@@ -12,20 +13,10 @@ import {
   CardFooter,
   Divider,
   Link,
+  Image,
 } from "@nextui-org/react";
 
-type WordPair = {
-  french: string;
-  english: string;
-  color: string;
-};
-
-type SelectedPair = {
-  french: string | null;
-  english: string | null;
-};
-
-const WordCards: React.FC = () => {
+const EditoA2: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
@@ -266,4 +257,4 @@ const WordCards: React.FC = () => {
   );
 };
 
-export default WordCards;
+export default EditoA2;

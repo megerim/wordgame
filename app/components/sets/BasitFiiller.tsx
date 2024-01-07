@@ -5,6 +5,8 @@ import { Button, ButtonGroup } from "@nextui-org/react";
 import BackIcon from "@/app/components/icons/BackIcon";
 import ReplayIcon from "@/app/components/icons/ReplayIcon";
 
+import { WordPair, SelectedPair } from '@/app/types/types';
+
 import {
   Card,
   CardHeader,
@@ -12,50 +14,42 @@ import {
   CardFooter,
   Divider,
   Link,
+  Image,
 } from "@nextui-org/react";
 
-type WordPair = {
-  french: string;
-  english: string;
-  color: string;
-};
 
-type SelectedPair = {
-  french: string | null;
-  english: string | null;
-};
 
-const WordCards: React.FC = () => {
+const BasitFiiller: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
       [
-        { french: "chat", english: "cat", color: "red-500" },
-        { french: "chien", english: "dog", color: "blue-500" },
-        { french: "pomme", english: "apple", color: "orange-500" },
-        { french: "livre", english: "book", color: "purple-500" },
-        { french: "maison", english: "house", color: "yellow-500" },
-      ],
-      [
-        { french: "voiture", english: "car", color: "yellow-500" },
-        { french: "soleil", english: "sun", color: "red-500" },
-        { french: "fleur", english: "flower", color: "orange-500" },
-        { french: "arbre", english: "tree", color: "purple-500" },
-        { french: "lune", english: "moon", color: "blue-500" },
-      ],
-      [
-        { french: "étoile", english: "star", color: "yellow-500" },
-        { french: "ciel", english: "sky", color: "blue-500" },
-        { french: "montagne", english: "mountain", color: "purple-500" },
-        { french: "mer", english: "sea", color: "red-500" },
-        { french: "terre", english: "earth", color: "orange-500" },
-      ],
-      [
-        { french: "feu", english: "fire", color: "red-500" },
-        { french: "eau", english: "water", color: "blue-500" },
-        { french: "pierre", english: "stone", color: "gray-500" },
-        { french: "araignée", english: "spider", color: "black-500" },
-        { french: "oiseau", english: "bird", color: "green-500" },
+        { french: "rapidement", english: "quickly", color: "red-500" },
+    { french: "lentement", english: "slowly", color: "blue-500" },
+    { french: "facilement", english: "easily", color: "orange-500" },
+    { french: "bien", english: "well", color: "purple-500" },
+    { french: "mal", english: "badly", color: "yellow-500" },
+  ],
+  [
+    { french: "souvent", english: "often", color: "yellow-500" },
+    { french: "rarement", english: "rarely", color: "red-500" },
+    { french: "toujours", english: "always", color: "orange-500" },
+    { french: "jamais", english: "never", color: "purple-500" },
+    { french: "parfois", english: "sometimes", color: "blue-500" },
+  ],
+  [
+    { french: "ici", english: "here", color: "yellow-500" },
+    { french: "là", english: "there", color: "blue-500" },
+    { french: "partout", english: "everywhere", color: "purple-500" },
+    { french: "nulle part", english: "nowhere", color: "red-500" },
+    { french: "ailleurs", english: "elsewhere", color: "orange-500" },
+  ],
+  [
+    { french: "tôt", english: "early", color: "red-500" },
+    { french: "tard", english: "late", color: "blue-500" },
+    { french: "déjà", english: "already", color: "gray-500" },
+    { french: "encore", english: "again", color: "black-500" },
+    { french: "maintenant", english: "now", color: "green-500" },
       ],
       // Add more sets as needed...
     ],
@@ -266,4 +260,4 @@ const WordCards: React.FC = () => {
   );
 };
 
-export default WordCards;
+export default BasitFiiller;
