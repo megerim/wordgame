@@ -1,4 +1,4 @@
-import RenklerSekiller from '@/app/components/sets/RenklerSekiller'
+import RenklerSekiller from '@/components/sets/RenklerSekiller'
 
 
 export default function Home() {

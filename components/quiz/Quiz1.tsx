@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Button, Card, CardHeader, CardBody, CardFooter, Divider } from '@nextui-org/react';
 import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 import confetti from "canvas-confetti";
 
 interface QuizQuestion {

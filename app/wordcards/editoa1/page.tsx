@@ -1,4 +1,4 @@
-import EditoA1 from '@/app/components/sets/EditoA1'
+import EditoA1 from '@/components/sets/EditoA1'
 
 
 export default function Home() {

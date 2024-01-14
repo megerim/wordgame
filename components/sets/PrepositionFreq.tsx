@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
 import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
 import { WordPair, SelectedPair } from '@/app/types/types';
 
@@ -16,43 +16,28 @@ import {
   Divider
 } from "@nextui-org/react";
 
-const RenklerSekiller: React.FC = () => {
+
+const Sayilar: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
       [
-        { french: "chat", english: "cat", color: "red-500" },
-        { french: "chien", english: "dog", color: "blue-500" },
-        { french: "pomme", english: "apple", color: "orange-500" },
-        { french: "livre", english: "book", color: "purple-500" },
-        { french: "maison", english: "house", color: "yellow-500" },
+        { french: "sur", english: "on", color: "yellow-500" },
+        { french: "dans", english: "in", color: "red-500" },
+        { french: "devant", english: "in front of", color: "orange-500" },
+        { french: "à gauche de", english: "on the left", color: "orange-500" },
+        { french: "entre", english: "between", color: "purple-500" },
       ],
       [
-        { french: "voiture", english: "car", color: "yellow-500" },
-        { french: "soleil", english: "sun", color: "red-500" },
-        { french: "fleur", english: "flower", color: "orange-500" },
-        { french: "arbre", english: "tree", color: "purple-500" },
-        { french: "lune", english: "moon", color: "blue-500" },
+        { french: "derriére", english: "behind", color: "yellow-500" },
+        { french: "sous", english: "under", color: "blue-500" },
+        { french: "à côté de", english: "next to", color: "yellow-500" },
+        { french: "à droite de", english: "on the right", color: "red-500" },
+        { french: "en face de", english: "across", color: "purple-500" },
       ],
-      [
-        { french: "étoile", english: "star", color: "yellow-500" },
-        { french: "ciel", english: "sky", color: "blue-500" },
-        { french: "montagne", english: "mountain", color: "purple-500" },
-        { french: "mer", english: "sea", color: "red-500" },
-        { french: "terre", english: "earth", color: "orange-500" },
-      ],
-      [
-        { french: "feu", english: "fire", color: "red-500" },
-        { french: "eau", english: "water", color: "blue-500" },
-        { french: "pierre", english: "stone", color: "gray-500" },
-        { french: "araignée", english: "spider", color: "black-500" },
-        { french: "oiseau", english: "bird", color: "green-500" },
-      ],
-      // Add more sets as needed...
     ],
     []
   );
-
   const triggerFireworks = () => {
     confetti({
       particleCount: 100,
@@ -70,16 +55,22 @@ const RenklerSekiller: React.FC = () => {
   });
   const [firstClick, setFirstClick] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [tapsCount, setTapsCount] = useState<{ [key: string]: number }>({});
 
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
 
+
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
-    if (!firstClick) {
-      setFirstClick(word);
+    setTapsCount((prev) => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
+
+    if (!isMatched(word)) {
+      if (!firstClick) {
+        setFirstClick(word);
+      }
+      setSelectedPair((prev) => ({ ...prev, [language]: word }));
     }
-    setSelectedPair((prev) => ({ ...prev, [language]: word }));
   };
 
   const checkMatch = useCallback(() => {
@@ -201,16 +192,19 @@ const RenklerSekiller: React.FC = () => {
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("french", pair.french)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("french", pair.french)}
                 >
                   <span>{pair.french}</span>
+                  {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                    <span className="translation">{pair.english}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -218,16 +212,19 @@ const RenklerSekiller: React.FC = () => {
               {shuffledEnglishWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("english", pair.english)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("english", pair.english)}
                 >
                   <span>{pair.english}</span>
+                  {tapsCount[pair.english] >= 3 && (
+                    <span className="translation">{pair.french}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -249,10 +246,10 @@ const RenklerSekiller: React.FC = () => {
           >
             <ReplayIcon />
           </Button>
-      </CardFooter>
+        </CardFooter>
       </Card>
     </>
   );
 };
 
-export default RenklerSekiller;
+export default Sayilar;

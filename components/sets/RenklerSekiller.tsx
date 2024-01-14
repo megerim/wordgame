@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
 import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
 import { WordPair, SelectedPair } from '@/app/types/types';
 
@@ -16,45 +16,55 @@ import {
   Divider
 } from "@nextui-org/react";
 
-
-
-const BasitFiiller: React.FC = () => {
+const RenklerSekiller: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
       [
-        { french: "rapidement", english: "quickly", color: "red-500" },
-    { french: "lentement", english: "slowly", color: "blue-500" },
-    { french: "facilement", english: "easily", color: "orange-500" },
-    { french: "bien", english: "well", color: "purple-500" },
-    { french: "mal", english: "badly", color: "yellow-500" },
-  ],
-  [
-    { french: "souvent", english: "often", color: "yellow-500" },
-    { french: "rarement", english: "rarely", color: "red-500" },
-    { french: "toujours", english: "always", color: "orange-500" },
-    { french: "jamais", english: "never", color: "purple-500" },
-    { french: "parfois", english: "sometimes", color: "blue-500" },
-  ],
-  [
-    { french: "ici", english: "here", color: "yellow-500" },
-    { french: "là", english: "there", color: "blue-500" },
-    { french: "partout", english: "everywhere", color: "purple-500" },
-    { french: "nulle part", english: "nowhere", color: "red-500" },
-    { french: "ailleurs", english: "elsewhere", color: "orange-500" },
-  ],
-  [
-    { french: "tôt", english: "early", color: "red-500" },
-    { french: "tard", english: "late", color: "blue-500" },
-    { french: "déjà", english: "already", color: "gray-500" },
-    { french: "encore", english: "again", color: "black-500" },
-    { french: "maintenant", english: "now", color: "green-500" },
+        { french: "rouge", english: "red", color: "red-500" },
+        { french: "bleu", english: "blue", color: "blue-500" },
+        { french: "violet", english: "purple", color: "purple-500" },
+        { french: "jaune", english: "yellow", color: "yellow-500" },
+        { french: "carré", english: "square", color: "red-500" },
       ],
-      // Add more sets as needed...
+      [
+        { french: "twenty five", english: "vingt-cinq", color: "red-500" },
+        { french: "thirty three", english: "trente-trois", color: "blue-500" },
+        { french: "blanc", english: "white", color: "red-500" },
+        { french: "sixty", english: "soixante", color: "gray-500" },
+        { french: "vert", english: "green", color: "yellow-500" },
+      ],
+      [
+        { french: "fifty", english: "cinquante", color: "black-500" },
+        { french: "noir", english: "black", color: "orange-500" },
+        { french: "rond", english: "circle", color: "yellow-500" },
+        { french: "gris", english: "gray", color: "purple-500" },
+        { french: "marron", english: "brown", color: "blue-500" },
+      ],
+      [
+        { french: "zero", english: "zéro", color: "yellow-500" },
+        { french: "one", english: "un", color: "red-500" },
+        { french: "two", english: "deux", color: "blue-500" },
+        { french: "three", english: "trois", color: "orange-500" },
+        { french: "four", english: "quatre", color: "purple-500" },
+      ],
+      [
+        { french: "five", english: "cinq", color: "yellow-500" },
+        { french: "six", english: "six", color: "yellow-500" },
+        { french: "seven", english: "sept", color: "red-500" },
+        { french: "eight", english: "huit", color: "orange-500" },
+        { french: "nine", english: "neuf", color: "purple-500" },
+      ],
+      [
+        { french: "ten", english: "dix", color: "blue-500" },
+        { french: "eleven", english: "onze", color: "blue-500" },
+        { french: "twelve", english: "douze", color: "purple-500" },
+        { french: "fifteen", english: "quinze", color: "red-500" },
+        { french: "twenty", english: "vingt", color: "orange-500" },
+      ],
     ],
     []
   );
-
   const triggerFireworks = () => {
     confetti({
       particleCount: 100,
@@ -72,16 +82,22 @@ const BasitFiiller: React.FC = () => {
   });
   const [firstClick, setFirstClick] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [tapsCount, setTapsCount] = useState<{ [key: string]: number }>({});
 
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
 
+
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
-    if (!firstClick) {
-      setFirstClick(word);
+    setTapsCount((prev) => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
+
+    if (!isMatched(word)) {
+      if (!firstClick) {
+        setFirstClick(word);
+      }
+      setSelectedPair((prev) => ({ ...prev, [language]: word }));
     }
-    setSelectedPair((prev) => ({ ...prev, [language]: word }));
   };
 
   const checkMatch = useCallback(() => {
@@ -203,16 +219,19 @@ const BasitFiiller: React.FC = () => {
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("french", pair.french)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("french", pair.french)}
                 >
                   <span>{pair.french}</span>
+                  {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                    <span className="translation">{pair.english}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -220,16 +239,19 @@ const BasitFiiller: React.FC = () => {
               {shuffledEnglishWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("english", pair.english)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("english", pair.english)}
                 >
                   <span>{pair.english}</span>
+                  {tapsCount[pair.english] >= 3 && (
+                    <span className="translation">{pair.french}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -251,10 +273,10 @@ const BasitFiiller: React.FC = () => {
           >
             <ReplayIcon />
           </Button>
-      </CardFooter>
+        </CardFooter>
       </Card>
     </>
   );
 };
 
-export default BasitFiiller;
+export default RenklerSekiller;

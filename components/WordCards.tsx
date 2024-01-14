@@ -1,22 +1,31 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
-import { Button } from "@nextui-org/react";
-import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
-
-import { WordPair, SelectedPair } from '@/app/types/types';
+import { Button, ButtonGroup } from "@nextui-org/react";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Divider
+  Divider,
+  Link,
 } from "@nextui-org/react";
 
-const BasitFiiller2: React.FC = () => {
+type WordPair = {
+  french: string;
+  english: string;
+  color: string;
+};
+
+type SelectedPair = {
+  french: string | null;
+  english: string | null;
+};
+
+const WordCards: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
@@ -234,25 +243,27 @@ const BasitFiiller2: React.FC = () => {
           </div>
         </CardBody>
         <Divider />
-        <CardFooter className="flex justify-between px-16">
-          <Link href="/" passHref>
-            <Button isIconOnly size="lg" color="warning" radius="sm">
-              <BackIcon />
+        <CardFooter className="flex justify-center">
+          <ButtonGroup>
+            <Link href="/">
+              <Button isIconOnly size="lg" color="warning" radius="sm">
+                <BackIcon />
+              </Button>
+            </Link>
+            <Button
+              isIconOnly
+              size="lg"
+              color="secondary"
+              radius="sm"
+              onClick={replayGame}
+            >
+              <ReplayIcon />
             </Button>
-          </Link>
-          <Button
-            isIconOnly
-            size="lg"
-            color="secondary"
-            radius="sm"
-            onClick={replayGame}
-          >
-            <ReplayIcon />
-          </Button>
-      </CardFooter>
+          </ButtonGroup>
+        </CardFooter>
       </Card>
     </>
   );
 };
 
-export default BasitFiiller2;
+export default WordCards;

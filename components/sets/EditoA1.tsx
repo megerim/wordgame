@@ -2,22 +2,21 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
-import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import Link from "next/link";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
-import { WordPair, SelectedPair } from '@/app/types/types';
+import { WordPair, SelectedPair } from "@/app/types/types";
 
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Divider
+  Divider,
 } from "@nextui-org/react";
 
-
-const Sayilar: React.FC = () => {
+const EditoA1: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
@@ -71,16 +70,22 @@ const Sayilar: React.FC = () => {
   });
   const [firstClick, setFirstClick] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [tapsCount, setTapsCount] = useState<{ [key: string]: number }>({});
 
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
 
+
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
-    if (!firstClick) {
-      setFirstClick(word);
+    setTapsCount((prev) => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
+
+    if (!isMatched(word)) {
+      if (!firstClick) {
+        setFirstClick(word);
+      }
+      setSelectedPair((prev) => ({ ...prev, [language]: word }));
     }
-    setSelectedPair((prev) => ({ ...prev, [language]: word }));
   };
 
   const checkMatch = useCallback(() => {
@@ -202,16 +207,19 @@ const Sayilar: React.FC = () => {
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("french", pair.french)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("french", pair.french)}
                 >
                   <span>{pair.french}</span>
+                  {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                    <span className="translation">{pair.english}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -219,16 +227,19 @@ const Sayilar: React.FC = () => {
               {shuffledEnglishWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("english", pair.english)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("english", pair.english)}
                 >
                   <span>{pair.english}</span>
+                  {tapsCount[pair.english] >= 3 && (
+                    <span className="translation">{pair.french}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -250,10 +261,10 @@ const Sayilar: React.FC = () => {
           >
             <ReplayIcon />
           </Button>
-      </CardFooter>
+        </CardFooter>
       </Card>
     </>
   );
 };
 
-export default Sayilar;
+export default EditoA1;

@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
 import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
 import { WordPair, SelectedPair } from '@/app/types/types';
 
@@ -70,12 +70,23 @@ const EditoA2: React.FC = () => {
   });
   const [firstClick, setFirstClick] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [tapsCount, setTapsCount] = useState<{ [key: string]: number }>({});
 
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
 
+
+  const incrementTapCount = (word: string) => {
+    setTapsCount(prev => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
+  };
+
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
+    if (!isMatched(word)) {
+      incrementTapCount(word); // Increment tap count only if the word is not already matched
+    }
+
+    // Existing logic for selecting a card
     if (!firstClick) {
       setFirstClick(word);
     }
@@ -156,6 +167,15 @@ const EditoA2: React.FC = () => {
     []
   );
 
+
+  const handleWordTap = (word: string) => {
+    setTapsCount(prev => {
+      const currentCount = prev[word] || 0;
+      return { ...prev, [word]: currentCount + 1 };
+    });
+  };
+
+
   // Shuffle the words on the client side after the component mounts
   useEffect(() => {
     setShuffledFrenchWords(shuffleArray([...wordPairs]));
@@ -201,16 +221,19 @@ const EditoA2: React.FC = () => {
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("french", pair.french)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("french", pair.french)}
                 >
                   <span>{pair.french}</span>
+                {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                  <span className="translation">{pair.english}</span>
+                )}
                 </div>
               ))}
             </div>
@@ -218,16 +241,17 @@ const EditoA2: React.FC = () => {
               {shuffledEnglishWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("english", pair.english)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("english", pair.english)}
                 >
                   <span>{pair.english}</span>
+                  {tapsCount[pair.english] >= 3 && <span className="translation">{pair.french}</span>}
                 </div>
               ))}
             </div>

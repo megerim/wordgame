@@ -2,51 +2,79 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
-import Link from 'next/link';
-import BackIcon from "@/app/components/icons/BackIcon";
-import ReplayIcon from "@/app/components/icons/ReplayIcon";
+import Link from "next/link";
+import BackIcon from "@/components/icons/BackIcon";
+import ReplayIcon from "@/components/icons/ReplayIcon";
 
-import { WordPair, SelectedPair } from '@/app/types/types';
+import { WordPair, SelectedPair } from "@/app/types/types";
 
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Divider
+  Divider,
 } from "@nextui-org/react";
 
-const EditoA1: React.FC = () => {
+const BasitFiiller: React.FC = () => {
   // Extended list of word pairs
   const allWordPairs: WordPair[][] = useMemo(
     () => [
       [
-        { french: "chat", english: "cat", color: "red-500" },
-        { french: "chien", english: "dog", color: "blue-500" },
-        { french: "pomme", english: "apple", color: "orange-500" },
-        { french: "livre", english: "book", color: "purple-500" },
-        { french: "maison", english: "house", color: "yellow-500" },
+        { french: "aller", english: "go", color: "red-500" },
+        { french: "attendre", english: "wait(for)", color: "blue-500" },
+        { french: "boire", english: "drink", color: "purple-500" },
+        { french: "commencer", english: "start", color: "yellow-500" },
+        { french: "dire", english: "say/tell", color: "blue-500" },
       ],
       [
-        { french: "voiture", english: "car", color: "yellow-500" },
-        { french: "soleil", english: "sun", color: "red-500" },
-        { french: "fleur", english: "flower", color: "orange-500" },
-        { french: "arbre", english: "tree", color: "purple-500" },
-        { french: "lune", english: "moon", color: "blue-500" },
+        { french: "comprendre", english: "understand", color: "yellow-500" },
+        { french: "avoir", english: "have", color: "orange-500" },
+        { french: "décider", english: "decide", color: "red-500" },
+        { french: "parler", english: "talk/speak", color: "yellow-500" },
+        { french: "devenir", english: "become", color: "purple-500" },
       ],
       [
-        { french: "étoile", english: "star", color: "yellow-500" },
-        { french: "ciel", english: "sky", color: "blue-500" },
-        { french: "montagne", english: "mountain", color: "purple-500" },
-        { french: "mer", english: "sea", color: "red-500" },
-        { french: "terre", english: "earth", color: "orange-500" },
+        { french: "demander", english: "ask", color: "orange-500" },
+        { french: "partir", english: "leave", color: "red-500" },
+        { french: "suivre", english: "follow", color: "red-500" },
+        { french: "rester", english: "stay", color: "purple-500" },
+        { french: "pouvoir", english: "to be able to", color: "blue-500" },
       ],
       [
-        { french: "feu", english: "fire", color: "red-500" },
-        { french: "eau", english: "water", color: "blue-500" },
-        { french: "pierre", english: "stone", color: "gray-500" },
-        { french: "araignée", english: "spider", color: "black-500" },
-        { french: "oiseau", english: "bird", color: "green-500" },
+        { french: "prendre", english: "take", color: "yellow-500" },
+        { french: "rendre", english: "return (obj)", color: "red-500" },
+        { french: "répondre", english: "respond", color: "orange-500" },
+        { french: "penser", english: "think", color: "orange-500" },
+        { french: "revenir", english: "come back", color: "blue-500" },
+      ],
+      [
+        { french: "porter", english: "wear/carry", color: "purple-500" },
+        { french: "savoir", english: "know", color: "yellow-500" },
+        { french: "téléphoner", english: "call", color: "orange-500" },
+        { french: "vivre", english: "decide", color: "red-500" },
+        { french: "trouver", english: "find", color: "blue-500" },
+      ],
+      [
+        { french: "tenir", english: "hold/keep", color: "purple-500" },
+        { french: "venir", english: "come", color: "yellow-500" },
+        { french: "voir", english: "ask", color: "orange-500" },
+        { french: "vouloir", english: "become", color: "purple-500" },
+        { french: "devoir", english: "to have to", color: "blue-500" },
+      ],
+      [
+        { french: "donner", english: "give", color: "yellow-500" },
+        { french: "entendre", english: "hear", color: "blue-500" },
+        { french: "être", english: "to be", color: "purple-500" },
+        { french: "faire", english: "do/make", color: "red-500" },
+        { french: "laisser", english: "leave", color: "orange-500" },
+      ],
+      [
+        { french: "lire", english: "read", color: "red-500" },
+        { french: "manger", english: "eat", color: "blue-500" },
+        { french: "mettre", english: "put", color: "gray-500" },
+        { french: "montrer", english: "show", color: "black-500" },
+        { french: "occuper", english: "occupy", color: "green-500" },
       ],
       // Add more sets as needed...
     ],
@@ -70,16 +98,21 @@ const EditoA1: React.FC = () => {
   });
   const [firstClick, setFirstClick] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
+  const [tapsCount, setTapsCount] = useState<{ [key: string]: number }>({});
 
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
 
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
-    if (!firstClick) {
-      setFirstClick(word);
+    setTapsCount((prev) => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
+
+    if (!isMatched(word)) {
+      if (!firstClick) {
+        setFirstClick(word);
+      }
+      setSelectedPair((prev) => ({ ...prev, [language]: word }));
     }
-    setSelectedPair((prev) => ({ ...prev, [language]: word }));
   };
 
   const checkMatch = useCallback(() => {
@@ -201,16 +234,19 @@ const EditoA1: React.FC = () => {
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("french", pair.french)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("french", pair.french)}
                 >
                   <span>{pair.french}</span>
+                  {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                    <span className="translation">{pair.english}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -218,16 +254,19 @@ const EditoA1: React.FC = () => {
               {shuffledEnglishWords.map((pair, index) => (
                 <div
                   key={index}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex items-center justify-center cursor-pointer ring-4 ${
+                  onClick={() => handleCardClick("english", pair.english)}
+                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
                       ? "bg-yellow-500 ring-gray-300"
                       : "bg-white ring-gray-300"
                   }`}
-                  onClick={() => handleCardClick("english", pair.english)}
                 >
                   <span>{pair.english}</span>
+                  {tapsCount[pair.english] >= 3 && (
+                    <span className="translation">{pair.french}</span>
+                  )}
                 </div>
               ))}
             </div>
@@ -249,10 +288,10 @@ const EditoA1: React.FC = () => {
           >
             <ReplayIcon />
           </Button>
-      </CardFooter>
+        </CardFooter>
       </Card>
     </>
   );
 };
 
-export default EditoA1;
+export default BasitFiiller;

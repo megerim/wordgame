@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-import Logo from "@/app/components/ui/Logo";
+import Logo from "@/components/ui/Logo";
 
 import { Button } from "@nextui-org/react";
 
@@ -12,8 +12,8 @@ const IndexPage: React.FC = () => {
       <Divider />
       <CardBody>
         <ul className="text-center">
-          <li className="my-3"><Link className="text-2xl" href="wordcards/renkler"><Button size="lg" className="min-w-48">Renkler</Button></Link></li>
-          <li className="my-3"><Link className="text-2xl" href="wordcards/sayilar"><Button size="lg" className="min-w-48">Sayılar</Button></Link></li>
+          <li className="my-3"><Link className="text-2xl" href="wordcards/renkler"><Button size="lg" className="min-w-48">Renkler&Sayılar</Button></Link></li>
+          <li className="my-3"><Link className="text-2xl" href="wordcards/preposition"><Button size="lg" className="min-w-48">Prepositions</Button></Link></li>
           <li className="my-3"><Link className="text-2xl" href="wordcards/basitfiiller"><Button size="lg" className="min-w-48">Basit Fiiller</Button></Link></li>
           <li className="my-3"><Link className="text-2xl" href="wordcards/basitfiiller2"><Button size="lg" className="min-w-48">Basit Fiiller v2</Button></Link></li>
           <li className="my-3"><Link className="text-2xl" href="wordcards/editoa1"><Button size="lg" className="min-w-48">Edito A1</Button></Link></li>

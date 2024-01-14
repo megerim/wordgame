@@ -1,7 +1,7 @@
 
 import { Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
-import Logo from "@/app/components/ui/Logo";
-import Footer from "@/app/components/ui/Footer";
+import Logo from "@/components/ui/Logo";
+import Footer from "@/components/ui/Footer";
 
 import { Button } from "@nextui-org/react";
 
