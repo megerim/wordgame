@@ -14,9 +14,9 @@ const QuizPage: React.FC = () => {
       <Divider />
       <CardBody>
         <ul className="text-center">
-          <li className="my-5"><Link className="text-2xl" href="/quiz/quiz1"><Button size="lg" className="min-w-48">Quiz 1</Button></Link></li>
-          <li className="my-5"><Link className="text-2xl" href="/quiz/quiz2"><Button size="lg" className="min-w-48">Quiz 2</Button></Link></li>
-          <li className="my-5"><Link className="text-3xl" href="/quiz/quiz3"><Button size="lg" className="min-w-48">Quiz 3</Button></Link></li>
+          <li className="my-5"><Link className="text-2xl" href="/quiz/quiz1"><Button size="lg" className="min-w-48">COD</Button></Link></li>
+          <li className="my-5"><Link className="text-2xl" href="/quiz/quiz2"><Button size="lg" className="min-w-48">COI</Button></Link></li>
+          <li className="my-5"><Link className="text-3xl" href="/quiz/quiz3"><Button size="lg" className="min-w-48">Basics</Button></Link></li>
         </ul>
       </CardBody>
       <Divider />

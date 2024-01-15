@@ -16,7 +16,7 @@ const IndexPage: React.FC = () => {
         <ul className="text-center">
           <li className="my-5"><Link className="text-2xl" href="/wordcards"><Button size="lg" className="min-w-48">Word Cards</Button></Link></li>
           <li className="my-5"><Link className="text-2xl" href="/quiz"><Button size="lg" className="min-w-48">Quick Quiz</Button></Link></li>
-          <li className="my-5"><Link className="text-3xl" href="/about"><Button size="lg" className="min-w-48">About Us</Button></Link></li>
+          <li className="my-5"><Link className="text-3xl" href="/about"><Button size="lg" className="min-w-48">About</Button></Link></li>
         </ul>
       </CardBody>
       <Divider />

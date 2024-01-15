@@ -50,7 +50,7 @@ const RenklerSekiller: React.FC = () => {
       ],
       [
         { french: "five", english: "cinq", color: "yellow-500" },
-        { french: "six", english: "six", color: "yellow-500" },
+        { french: "thirty four", english: "trente quatre", color: "yellow-500" },
         { french: "seven", english: "sept", color: "red-500" },
         { french: "eight", english: "huit", color: "orange-500" },
         { french: "nine", english: "neuf", color: "purple-500" },

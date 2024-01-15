@@ -14,14 +14,30 @@ interface QuizQuestion {
 
 const quizData: QuizQuestion[] = [
   {
-    question: "Quel est le complément d'objet direct dans la phrase suivante? J'aime lire ce livre.",
-    answers: ["J'aime", "Lire", "Ce livre", "Ce"],
-    correctAnswer: "Ce livre",
+    question: "Translate into the direct object pronoun: He loves you.",
+    answers: ["Il ta adore", "Il adore te", "Il t'adore", "Il adore tu"],
+    correctAnswer: "Il t'adore",
   },
   {
-    question: "Identifiez le complément d'objet indirect dans la phrase : Il parle à son ami.",
-    answers: ["Il", "Parle", "À son ami", "Ami"],
-    correctAnswer: "À son ami",
+    question: "Me, Le, and Te can become M', T', L' (e.g m'aime)",
+    answers: ["True", "False"],
+    correctAnswer: "True",
+  },
+  {
+    question: "Arrange this sentence into the direct object pronoun: Elle donne les cadeaux.",
+    answers: ["Elle donne les cadeux", "Elle donne les", "Elle les donne", "Elle leur donne"],
+    correctAnswer: "Elle les donne",
+  },
+  {
+    question: "Il leur achete des Livres. This is an example of the direct object pronoun.",
+    answers: ["True", "False"],
+    correctAnswer: "False",
+  },
+  // Yeni eklenen soru
+  {
+    question: "Quel est le complément d'objet direct dans la phrase suivante? J'aime lire ce livre.",
+    answers: ["Ce livre","J'aime", "Lire",  "Ce"],
+    correctAnswer: "Ce livre",
   },
   {
     question: "Dans la phrase 'Elle regarde le film avec intérêt', quel est le complément d'objet direct?",
@@ -29,19 +45,9 @@ const quizData: QuizQuestion[] = [
     correctAnswer: "Le film",
   },
   {
-    question: "Quel est le complément d'objet indirect dans la phrase : Elle donne un cadeau à sa sœur.",
-    answers: ["Elle", "Donne", "Un cadeau", "À sa sœur"],
-    correctAnswer: "À sa sœur",
-  },
-  {
     question: "Identifiez le complément d'objet direct dans la phrase : Nous écoutons la musique.",
     answers: ["Nous", "Écoutons", "La musique", "Écouter"],
     correctAnswer: "La musique",
-  },
-  {
-    question: "Dans la phrase 'Il envoie une lettre à sa grand-mère', quel est le complément d'objet indirect?",
-    answers: ["Il", "Envoie", "Une lettre", "À sa grand-mère"],
-    correctAnswer: "À sa grand-mère",
   },
   {
     question: "Trouvez le complément d'objet direct dans la phrase : Tu prépares le dîner.",
@@ -49,21 +55,37 @@ const quizData: QuizQuestion[] = [
     correctAnswer: "Le dîner",
   },
   {
-    question: "Quel est le complément d'objet indirect dans la phrase : Elle raconte une histoire à ses enfants.",
-    answers: ["Elle", "Raconte", "Une histoire", "À ses enfants"],
-    correctAnswer: "À ses enfants",
-  },
-  {
     question: "Dans la phrase 'Ils ont perdu leurs clés hier soir', quel est le complément d'objet direct?",
-    answers: ["Ils", "Ont perdu", "Leurs clés", "Hier soir"],
+    answers: ["Ils", "Ont perdu", "Hier soir", "Leurs clés"],
     correctAnswer: "Leurs clés",
   },
   {
-    question: "Identifiez le complément d'objet indirect dans la phrase : Il offre des fleurs à sa petite amie.",
-    answers: ["Il", "Offre", "Des fleurs", "À sa petite amie"],
-    correctAnswer: "À sa petite amie",
+    question: "'J'aime ces chaussures, il me _______ faut.'",
+    answers: ["Me", "Les", "Il", "Faut"],
+    correctAnswer: "Les",
+  },
+  {
+    question: "Dans la phrase 'Nous avons du mal à faire ce devoir, on peut demander au professeur qu’il ________ aide.', quel pronom COD convient ?",
+    answers: ["Du mal", "Nous", "Le", "Il"],
+    correctAnswer: "Nous",
+  },
+  {
+    question: " 'Vous lisez le journal régulièrement ?' en utilisant le pronom direct qui convient.",
+    answers: ["Oui, le lis.", "Non, le ne lis pas.", "Régulièrement", "Vous"],
+    correctAnswer: "Oui, le lis.",
+  },
+  {
+    question: "'Est-ce que tu écoutes la radio tous les matins ?'",
+    answers: ["Tu", "La radio", "Tous les matins", "Est-ce que"],
+    correctAnswer: "La radio",
+  },
+  {
+    question: " 'Vous appréciez Nantes ?' en utilisant le pronom direct qui convient.",
+    answers: ["Oui, l'apprécie.", "Non, ne l'apprécie pas.", "Nantes", "Vous"],
+    correctAnswer: "Oui, l'apprécie.",
   },
 ];
+
 
 
 
@@ -111,8 +133,8 @@ const MiniQuiz: React.FC = () => {
   }, [currentQuestionIndex]);
 
   return (
-    <div  >
-    <Card className='min-h-[450px] min-w-[450px] antialiased'>
+    <div className=' px-2' >
+    <Card className='min-h-[450px] max-w-[450px] antialiased'>
       <CardHeader>
         <p>Question {currentQuestionIndex + 1} of {quizData.length}</p>
       </CardHeader>

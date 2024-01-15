@@ -85,8 +85,8 @@ const MiniQuiz: React.FC = () => {
   }, [currentQuestionIndex]);
 
   return (
-    <div  >
-    <Card className='min-h-[450px] min-w-[450px] antialiased'>
+    <div className=' px-2' >
+    <Card className='min-h-[450px] max-w-[450px] antialiased'>
       <CardHeader>
         <p>Question {currentQuestionIndex + 1} of {quizData.length}</p>
       </CardHeader>
