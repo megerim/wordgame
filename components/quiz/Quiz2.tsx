@@ -14,31 +14,57 @@ interface QuizQuestion {
 
 const quizData: QuizQuestion[] = [
   {
-    question: "Comment dit-on 'hello' en français?",
-    answers: ["Bonjour", "Au revoir", "Merci", "S'il vous plaît"],
-    correctAnswer: "Bonjour",
+    question: "Qui ou quoi remplace le pronom 'le' dans la phrase : 'Tu regardes le match chez Joseph ?'",
+    answers: ["Tu", "Le match", "Chez Joseph", "Eric"],
+    correctAnswer: "Le match",
   },
   {
-    question: "Quelle est la traduction de 'thank you' en français?",
-    answers: ["Bonjour", "Oui", "Merci", "Non"],
-    correctAnswer: "Merci",
+    question: "Quel pronom COD complète la phrase : 'J'aime ces chaussures, il me _______ faut.'",
+    answers: ["Me", "Les", "Il", "Faut"],
+    correctAnswer: "Les",
   },
   {
-    question: "Comment demande-t-on 'how are you?' en français?",
-    answers: ["Comment ça va?", "Quelle heure est-il?", "Où est la bibliothèque?", "Quel âge as-tu?"],
-    correctAnswer: "Comment ça va?",
+    question: "Quel pronom COD convient à la phrase : 'Phil et Eric construisent une maison, ils ________ construisent en bois.'",
+    answers: ["Une maison", "Ils", "En bois", "Construisent"],
+    correctAnswer: "La construisent",
   },
   {
-    question: "Que signifie 'I love you' en français?",
-    answers: ["Je t'aime", "Je te déteste", "Je ne sais pas", "Je suis désolé"],
-    correctAnswer: "Je t'aime",
+    question: "Dans la phrase 'Nous avons du mal à faire ce devoir, on peut demander au professeur qu’il ________ aide.', quel pronom COD convient ?",
+    answers: ["Du mal", "Nous", "Le", "Il"],
+    correctAnswer: "Nous",
   },
   {
-    question: "Comment dit-on 'goodbye' en français?",
-    answers: ["Bonjour", "Au revoir", "Merci", "Oui"],
-    correctAnswer: "Au revoir",
-  }
+    question: "Quel pronom COD complète la phrase : 'Pablo est un super ami, je ________ attends pour aller à la piscine.'",
+    answers: ["Pablo", "Un super ami", "Je", "À la piscine"],
+    correctAnswer: "Le",
+  },
+  {
+    question: "Dans la phrase 'Mes clés ? Je ________ ai laissées à l'hôtel.', quel pronom COD convient ?",
+    answers: ["Mes clés", "Je", "Les", "À l'hôtel"],
+    correctAnswer: "Les",
+  },
+  {
+    question: "Quel pronom COD convient à la phrase : 'Là je suis vraiment en retard. Tu vas ________ gronder, je ________ sais !'",
+    answers: ["En retard", "Tu", "Me", "Je"],
+    correctAnswer: "Me, Le",
+  },
+  {
+    question: "Répondez à la question : 'Vous lisez le journal régulièrement ?' en utilisant le pronom direct qui convient.",
+    answers: ["Oui, le lis.", "Non, le ne lis pas.", "Régulièrement", "Vous"],
+    correctAnswer: "Oui, le lis.",
+  },
+  {
+    question: "Quel pronom COD convient à la phrase : 'Est-ce que tu écoutes la radio tous les matins ?'",
+    answers: ["Tu", "La radio", "Tous les matins", "Est-ce que"],
+    correctAnswer: "La radio",
+  },
+  {
+    question: "Répondez à la question : 'Vous appréciez Nantes ?' en utilisant le pronom direct qui convient.",
+    answers: ["Oui, l'apprécie.", "Non, ne l'apprécie pas.", "Nantes", "Vous"],
+    correctAnswer: "Oui, l'apprécie.",
+  },
 ];
+
 
 
 const MiniQuiz: React.FC = () => {

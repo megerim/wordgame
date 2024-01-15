@@ -14,31 +14,57 @@ interface QuizQuestion {
 
 const quizData: QuizQuestion[] = [
   {
-    question: "Comment dit-on 'hello' en français?",
-    answers: ["Bonjour", "Au revoir", "Merci", "S'il vous plaît"],
-    correctAnswer: "Bonjour",
+    question: "Quel est le complément d'objet direct dans la phrase suivante? J'aime lire ce livre.",
+    answers: ["J'aime", "Lire", "Ce livre", "Ce"],
+    correctAnswer: "Ce livre",
   },
   {
-    question: "Quelle est la traduction de 'thank you' en français?",
-    answers: ["Bonjour", "Oui", "Merci", "Non"],
-    correctAnswer: "Merci",
+    question: "Identifiez le complément d'objet indirect dans la phrase : Il parle à son ami.",
+    answers: ["Il", "Parle", "À son ami", "Ami"],
+    correctAnswer: "À son ami",
   },
   {
-    question: "Comment demande-t-on 'how are you?' en français?",
-    answers: ["Comment ça va?", "Quelle heure est-il?", "Où est la bibliothèque?", "Quel âge as-tu?"],
-    correctAnswer: "Comment ça va?",
+    question: "Dans la phrase 'Elle regarde le film avec intérêt', quel est le complément d'objet direct?",
+    answers: ["Elle", "Regarde", "Le film", "Avec intérêt"],
+    correctAnswer: "Le film",
   },
   {
-    question: "Que signifie 'I love you' en français?",
-    answers: ["Je t'aime", "Je te déteste", "Je ne sais pas", "Je suis désolé"],
-    correctAnswer: "Je t'aime",
+    question: "Quel est le complément d'objet indirect dans la phrase : Elle donne un cadeau à sa sœur.",
+    answers: ["Elle", "Donne", "Un cadeau", "À sa sœur"],
+    correctAnswer: "À sa sœur",
   },
   {
-    question: "Comment dit-on 'goodbye' en français?",
-    answers: ["Bonjour", "Au revoir", "Merci", "Oui"],
-    correctAnswer: "Au revoir",
-  }
+    question: "Identifiez le complément d'objet direct dans la phrase : Nous écoutons la musique.",
+    answers: ["Nous", "Écoutons", "La musique", "Écouter"],
+    correctAnswer: "La musique",
+  },
+  {
+    question: "Dans la phrase 'Il envoie une lettre à sa grand-mère', quel est le complément d'objet indirect?",
+    answers: ["Il", "Envoie", "Une lettre", "À sa grand-mère"],
+    correctAnswer: "À sa grand-mère",
+  },
+  {
+    question: "Trouvez le complément d'objet direct dans la phrase : Tu prépares le dîner.",
+    answers: ["Tu", "Prépares", "Le dîner", "Préparer"],
+    correctAnswer: "Le dîner",
+  },
+  {
+    question: "Quel est le complément d'objet indirect dans la phrase : Elle raconte une histoire à ses enfants.",
+    answers: ["Elle", "Raconte", "Une histoire", "À ses enfants"],
+    correctAnswer: "À ses enfants",
+  },
+  {
+    question: "Dans la phrase 'Ils ont perdu leurs clés hier soir', quel est le complément d'objet direct?",
+    answers: ["Ils", "Ont perdu", "Leurs clés", "Hier soir"],
+    correctAnswer: "Leurs clés",
+  },
+  {
+    question: "Identifiez le complément d'objet indirect dans la phrase : Il offre des fleurs à sa petite amie.",
+    answers: ["Il", "Offre", "Des fleurs", "À sa petite amie"],
+    correctAnswer: "À sa petite amie",
+  },
 ];
+
 
 
 const MiniQuiz: React.FC = () => {
