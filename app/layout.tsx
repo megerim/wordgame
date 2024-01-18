@@ -4,6 +4,8 @@ import "./globals.css";
 import Logo from "@/components/ui/Logo";
 import Footer from "@/components/ui/Footer";
 import { Card, CardHeader, CardBody, CardFooter, Divider } from "@nextui-org/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from '@vercel/analytics/react';
 
 
 const montserrat = Montserrat({
@@ -42,6 +44,9 @@ export default function RootLayout({
       </CardFooter>
     </Card>
         </div>
+
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

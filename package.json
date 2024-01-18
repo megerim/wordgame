@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.9",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/speed-insights": "^1.0.5",
     "canvas-confetti": "^1.9.2",
     "framer-motion": "^10.17.9",
     "next": "14.0.4",
