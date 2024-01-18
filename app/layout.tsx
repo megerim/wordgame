@@ -4,7 +4,6 @@ import "./globals.css";
 import Logo from "@/components/ui/Logo";
 import Footer from "@/components/ui/Footer";
 import { Card, CardHeader, CardBody, CardFooter, Divider } from "@nextui-org/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from '@vercel/analytics/react';
 
 
@@ -45,7 +44,6 @@ export default function RootLayout({
     </Card>
         </div>
 
-        <SpeedInsights />
         <Analytics />
       </body>
     </html>
