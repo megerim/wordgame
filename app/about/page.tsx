@@ -13,12 +13,7 @@ import { Button } from "@nextui-org/react";
 
 export default function Home() {
   return (
-    <Card shadow="lg" className="max-w-[400px] antialiased">
-      <CardHeader className="flex justify-center text-center">
-        <Logo />
-      </CardHeader>
-      <Divider />
-      <CardBody className="flex items-center justify-center">
+    <div>
         <h3 className="text-center font-bold text-2xl">Kelimeleri öğütün!</h3>
 
         <p className="text-center mt-2">
@@ -77,16 +72,11 @@ export default function Home() {
           <Link href="mailto:mehmeterimgokhan99@gmail.com">Click to Mail!</Link>
         </p>
 
-        <Link className="text-3xl my-5" href="/">
+        <Link className="text-3xl my-5 flex justify-center" href="/">
           <Button size="lg" className="min-w-48">
             Ana Sayfaya Dön
           </Button>
         </Link>
-      </CardBody>
-      <Divider />
-      <CardFooter className="flex justify-center">
-        <Footer />
-      </CardFooter>
-    </Card>
+        </div>
   );
 }

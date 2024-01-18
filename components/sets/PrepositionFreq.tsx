@@ -2,20 +2,19 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import confetti from "canvas-confetti";
 import { Button } from "@nextui-org/react";
-import Link from 'next/link';
+import Link from "next/link";
 import BackIcon from "@/components/icons/BackIcon";
 import ReplayIcon from "@/components/icons/ReplayIcon";
 
-import { WordPair, SelectedPair } from '@/app/types/types';
+import { WordPair, SelectedPair } from "@/app/types/types";
 
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
-  Divider
+  Divider,
 } from "@nextui-org/react";
-
 
 const Sayilar: React.FC = () => {
   // Extended list of word pairs
@@ -43,14 +42,22 @@ const Sayilar: React.FC = () => {
         { french: "ne...jamais", english: "never", color: "purple-500" },
       ],
       [
-        { french: "tout le temps", english: "all the time", color: "yellow-500" },
+        {
+          french: "tout le temps",
+          english: "all the time",
+          color: "yellow-500",
+        },
         { french: "tous les jours", english: "everyday", color: "blue-500" },
         { french: "chaque jour", english: "each day", color: "yellow-500" },
         { french: "chaque soir", english: "each evening", color: "red-500" },
         { french: "chaque semaine", english: "each wake", color: "purple-500" },
       ],
       [
-        { french: "tout le temps", english: "all the time", color: "yellow-500" },
+        {
+          french: "tout le temps",
+          english: "all the time",
+          color: "yellow-500",
+        },
         { french: "tous les jours", english: "everyday", color: "blue-500" },
         { french: "une fois", english: "once", color: "yellow-500" },
         { french: "deux fois", english: "twice", color: "red-500" },
@@ -81,7 +88,6 @@ const Sayilar: React.FC = () => {
   const isSelected = (word: string) => firstClick === word;
 
   const isMatched = (word: string) => matchedPairs.includes(word);
-
 
   const handleCardClick = (language: keyof SelectedPair, word: string) => {
     setTapsCount((prev) => ({ ...prev, [word]: (prev[word] || 0) + 1 }));
@@ -197,24 +203,44 @@ const Sayilar: React.FC = () => {
   };
 
   return (
-    <>
-      <Card shadow="lg" className="max-w-[400px] antialiased">
-        <CardHeader className="flex justify-center text-center">
-          <div className="w-20 h-20 flex items-center justify-center text-xl font-bold rounded-full bg-black text-white ">
-            <span>
+    <div>
+          <div className="flex flex-row justify-center items-center gap-12">
+            
+          <Link href="/wordcards" passHref>
+            <Button isIconOnly size="lg" color="warning" radius="sm">
+              <BackIcon />
+            </Button>
+          </Link>
+            
+            
+            
+            <span className="w-14 h-14 flex items-center justify-center text-lg font-bold rounded-full bg-black text-white">
               {totalMatchedPairs + pairsMatchedInCurrentSet}/{totalPairs}
             </span>
+
+
+
+
+            <Button
+            isIconOnly
+            size="lg"
+            color="secondary"
+            radius="sm"
+            onClick={replayGame}
+          >
+            <ReplayIcon />
+          </Button>
+
+
           </div>
-        </CardHeader>
-        <Divider />
-        <CardBody>
+        
           <div className="grid grid-cols-2 gap-4 text-gray-800 text-center text-2xl">
             <div className="french">
               {shuffledFrenchWords.map((pair, index) => (
                 <div
                   key={index}
                   onClick={() => handleCardClick("french", pair.french)}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
+                  className={` my-6 h-[4.5rem] w-42 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.french)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.french)
@@ -223,7 +249,7 @@ const Sayilar: React.FC = () => {
                   }`}
                 >
                   <span>{pair.french}</span>
-                  {tapsCount[pair.french] >= 3 && !isMatched(pair.french) && (
+                  {tapsCount[pair.french] >= 5 && !isMatched(pair.french) && (
                     <span className="translation">{pair.english}</span>
                   )}
                 </div>
@@ -234,7 +260,7 @@ const Sayilar: React.FC = () => {
                 <div
                   key={index}
                   onClick={() => handleCardClick("english", pair.english)}
-                  className={`m-5 h-[4.5rem] w-36 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
+                  className={` my-6 h-[4.5rem] w-42 rounded-md flex flex-col items-center justify-center cursor-pointer ring-4 ${
                     isMatched(pair.english)
                       ? `${getRingColorClass(pair.color)} bg-green-500`
                       : isSelected(pair.english)
@@ -243,33 +269,14 @@ const Sayilar: React.FC = () => {
                   }`}
                 >
                   <span>{pair.english}</span>
-                  {tapsCount[pair.english] >= 3 && (
+                  {tapsCount[pair.english] >= 5 && (
                     <span className="translation">{pair.french}</span>
                   )}
                 </div>
               ))}
             </div>
           </div>
-        </CardBody>
-        <Divider />
-        <CardFooter className="flex justify-between px-16">
-          <Link href="/" passHref>
-            <Button isIconOnly size="lg" color="warning" radius="sm">
-              <BackIcon />
-            </Button>
-          </Link>
-          <Button
-            isIconOnly
-            size="lg"
-            color="secondary"
-            radius="sm"
-            onClick={replayGame}
-          >
-            <ReplayIcon />
-          </Button>
-        </CardFooter>
-      </Card>
-    </>
+    </div>
   );
 };
 

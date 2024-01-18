@@ -30,7 +30,7 @@ const quizData: QuizQuestion[] = [
   },
   {
     question: "Que signifie 'I love you' en français?",
-    answers: ["Je t'aime", "Je te déteste", "Je ne sais pas", "Je suis désolé"],
+    answers: ["Je te déteste", "Je ne sais pas", "Je suis désolé", "Je t'aime"],
     correctAnswer: "Je t'aime",
   },
   {
@@ -85,14 +85,34 @@ const MiniQuiz: React.FC = () => {
   }, [currentQuestionIndex]);
 
   return (
-    <div className=' px-2' >
-    <Card className='min-h-[450px] max-w-[450px] antialiased'>
-      <CardHeader>
+    <>
+    <div className='flex-col mx-auto'>
+
+      <div className='flex justify-between items-center mb-2'>
         <p>Question {currentQuestionIndex + 1} of {quizData.length}</p>
-      </CardHeader>
+
+<div className='flex gap-5'>
+        <Link href="/quiz" passHref>
+            <Button isIconOnly size="sm" color="warning" radius="sm">
+              <BackIcon />
+            </Button>
+          </Link>
+          <Button
+            isIconOnly
+            size="sm"
+            color="secondary"
+            radius="sm"
+            onClick={replayGame}
+          >
+            <ReplayIcon />
+          </Button>
+        </div>
+        </div>
       <Divider />
-      <CardBody className='justify-center flex'>
+      <div className='justify-center flex pt-2'>
         <p className="text-lg font-semibold mb-4">{currentQuestion.question}</p>
+
+      </div>
         <div className="flex flex-col gap-2">
           {currentQuestion.answers.map((answer) => (
             <Button 
@@ -104,26 +124,12 @@ const MiniQuiz: React.FC = () => {
             </Button>
           ))}
         </div>
-      </CardBody>
       <Divider />
-      <CardFooter className="flex justify-between px-16">
-          <Link href="/" passHref>
-            <Button isIconOnly size="lg" color="warning" radius="sm">
-              <BackIcon />
-            </Button>
-          </Link>
-          <Button
-            isIconOnly
-            size="lg"
-            color="secondary"
-            radius="sm"
-            onClick={replayGame}
-          >
-            <ReplayIcon />
-          </Button>
-      </CardFooter>
-    </Card>
-    </div>
+      <div className="flex justify-between px-16">
+          
+      </div>
+      </div>
+      </>
   );
 };
 
