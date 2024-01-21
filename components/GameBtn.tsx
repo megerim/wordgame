@@ -13,7 +13,7 @@ interface GameBtnProps {
 const GameBtn: React.FC<GameBtnProps> = ({ totalMatchedPairs, pairsMatchedInCurrentSet, totalPairs, replayGame }) => {
   return (
     <div className="flex flex-row justify-center items-center gap-12">
-      <Link href="/wordcards" passHref>
+      <Link href="../" passHref>
         <Button isIconOnly size="lg" color="warning" radius="sm">
           <BackIcon />
         </Button>

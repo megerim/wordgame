@@ -1,21 +1,42 @@
 
 import { Button, Link } from "@nextui-org/react";
+import ReactCountryFlag from "react-country-flag"
 
 const IndexPage: React.FC = () => {
   return (
     <div>
       <ul className="text-center">
         <li className="my-5">
-          <Link className="text-2xl" href="/wordcards">
-            <Button size="lg" className="min-w-48">
-              Kelime Kartları
+          <Link className="text-2xl" href="/en">
+            <Button size="lg" className="min-w-48" endContent={<ReactCountryFlag countryCode="GB"
+                svg
+                style={{
+                    width: '2em',
+                    height: '2em',
+                    marginLeft: '0.5em',
+                }}
+                title="United Kingdom Flag"/>}>
+              İngilizce
             </Button>
           </Link>
         </li>
         <li className="my-5">
-          <Link className="text-2xl" href="/quiz">
+          <Link className="text-2xl" href="/fr">
+            <Button size="lg" className="min-w-48" endContent={<ReactCountryFlag countryCode="FR"
+                svg
+                style={{
+                    width: '2em',
+                    height: '2em',
+                }}
+                title="French Flag"/>}>
+              Fransızca
+            </Button>
+          </Link>
+        </li>
+        <li className="my-5">
+          <Link className="text-3xl" href="/howto">
             <Button size="lg" className="min-w-48">
-              Hızlı Test
+              Nasıl Çalışıyor?
             </Button>
           </Link>
         </li>

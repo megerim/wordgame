@@ -10,3 +10,8 @@ background-image: url('/pattern.jpg');
   background-color: #1D2D4F;
   overflow: hidden;
 }
+
+.emojiFlag{
+  width: 2rem;
+  height: 2rem;
+}
