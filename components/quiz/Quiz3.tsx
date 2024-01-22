@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Button, Card, CardHeader, CardBody, CardFooter, Divider } from '@nextui-org/react';
+import { Button, Divider } from '@nextui-org/react';
 import Link from 'next/link';
 import BackIcon from "@/components/icons/BackIcon";
 import ReplayIcon from "@/components/icons/ReplayIcon";
@@ -79,7 +79,6 @@ const MiniQuiz: React.FC = () => {
   };
 
   useEffect(() => {
-    // Reset game state when current question index changes
     setSelectedAnswer(null);
     setIsCorrect(null);
   }, [currentQuestionIndex]);
@@ -92,7 +91,7 @@ const MiniQuiz: React.FC = () => {
         <p>Question {currentQuestionIndex + 1} of {quizData.length}</p>
 
 <div className='flex gap-5'>
-        <Link href="/quiz" passHref>
+        <Link href="../" passHref>
             <Button isIconOnly size="sm" color="warning" radius="sm">
               <BackIcon />
             </Button>
