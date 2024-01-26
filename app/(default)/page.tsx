@@ -34,6 +34,13 @@ const IndexPage: React.FC = () => {
           </Link>
         </li>
         <li className="my-5">
+          <Link className="text-3xl" href="/dnd">
+            <Button size="lg" className="min-w-48">
+              Drag&Drop
+            </Button>
+          </Link>
+        </li>
+        <li className="my-5">
           <Link className="text-3xl" href="/howto">
             <Button size="lg" className="min-w-48">
               Nasıl Çalışıyor?

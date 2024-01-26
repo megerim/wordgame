@@ -11,10 +11,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      keyframes: {
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '25%, 75%': { transform: 'translateX(-0.5rem)' },
+          '50%': { transform: 'translateX(0.5rem)' },
+        },
+      },
+      animation: {
+        shake: 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
       },
     },
   },
